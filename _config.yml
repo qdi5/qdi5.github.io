@@ -30,7 +30,10 @@ github_username:  qdi5
 # Build settings
 plugins:
   - jekyll-feed
+  - jekyll-paginate
+# 添加分页
 paginate: 5
+# 设置分页跳转的路径
 paginate_path: "/blog/page:num/"
 # Exclude from processing.
 # The following items will not be processed, by default.
