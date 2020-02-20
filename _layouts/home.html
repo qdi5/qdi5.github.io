@@ -6,14 +6,10 @@
   <body>
 
     <div>
-
       <header class="header-background">
-
         <div class="clearfix border-bottom-thick header-border">
+          
           <ul class="list-reset right py-1 header-text font-smoothing">
-              <li class="inline-block">
-                <a class="align-middle link-primary header-link mr-2" href="/blog">博客</a>
-              </li>
               <li class="inline-block">
                 <a class="align-middle link-primary header-link mr-2" href="/about">关于</a>
               </li>
@@ -53,12 +49,19 @@
 
         </div>
       </header>
-
+      <div class="container mx-auto">
+        {% include search.html %}
+      </div>
       <div class="container mx-auto px-2 py-4">
-        {% for post in site.posts %}
+        
+        {% for post in paginator.posts %}
           {% include post_block.html %}
         {% endfor %}
+        <div class="clearfix">
+          {% include paginate.html %}
+        </div>
       </div>
+      
     </div>
 
     {% include footer.html %}
