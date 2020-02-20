@@ -35,6 +35,8 @@ plugins:
 paginate: 5
 # 设置分页跳转的路径
 paginate_path: "/blog/page:num/"
+# 设置文章固定链接的格式
+permalink: /:year/:month/:day/:title:output_ext
 # Exclude from processing.
 # The following items will not be processed, by default.
 # Any item listed under the `exclude:` key here will be automatically added to
