@@ -61,4 +61,4 @@ defaults:
   scope:
     path: "_posts/kindle" # an empty string here means all files in the project
   values:
-    layout: "default"
+    layout: "post"
