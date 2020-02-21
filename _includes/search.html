@@ -16,16 +16,20 @@
     z-index: 1;
   }
   .search-input {
+    display: block;
     width: 100%;
     height: 100%;
+    margin: auto;
     padding-left: 8px;
     color: #666;
     text-align: center;
-    border: none;
-    box-shadow: 1px 1px 1px 1px #eee,
-    1px 1px 1px 2px #ccc,
-    1px 1px 1px 3px #ddd;
-    
+    border: 2px solid #181818;
+    outline: none;
+  }
+  @media screen and (max-width: 768px) {
+    .search-input {
+      width: 95%;
+    }
   }
   .result-warpper {
     display: none;
