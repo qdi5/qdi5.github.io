@@ -1,19 +1,30 @@
+<style>
+  .container {
+    position: relative;
+  }
+  .ft-content {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    height: 57px;
+    margin: auto;
+    line-height: 25px;
+  }
+</style>
 <div class="border-top-thin clearfix mt-2 mt-lg-4">
-  <div class="container mx-auto px-2">
-    <p class="col-8 sm-width-full left py-2 mb-0">
+  <div class="container mx-auto px-2 clearfix">
+    <p class="col-8 sm-width-full left py-2 mb-0 ft-content">
       此项目由
       <a class="text-accent" href="https://github.com/{{ site.github_username }}">
         {{ site.github_username }}
       </a>
       维护，欢迎
       <a class="text-accent" href="https://github.com/{{ site.github_username }}/{{ site.github_repo }}">Star</a>，谢谢！</p>
-    <!-- <ul class="list-reset right clearfix sm-width-full py-2 mb-2 mb-lg-0">
+      <ul class="list-reset right clearfix sm-width-full py-2 mb-2 mb-lg-0">
       <li class="inline-block mr-1">
-        
+        <img src="/assets/images/weixin_small.jpg" width="150" height="auto" alt="">
       </li>
-      <li class="inline-block">
-        
-      </li>
-    </ul> -->
+     
+    </ul>
   </div>
 </div>
