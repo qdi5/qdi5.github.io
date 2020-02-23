@@ -57,8 +57,13 @@ permalink: /:year/:month/:day/:title:output_ext
 #   - vendor/gems/
 #   - vendor/ruby/
 defaults:
--
-  scope:
-    path: "_posts/kindle" # an empty string here means all files in the project
-  values:
-    layout: "post"
+  -
+    scope:
+      path: "_posts/kindle" # an empty string here means all files in the project
+    values:
+      layout: "post"
+  -
+    scope:
+      path: "_posts/google" # an empty string here means all files in the project
+    values:
+      layout: "post"
