@@ -8,7 +8,7 @@
 # For technical reasons, this file is *NOT* reloaded automatically when you use
 # 'bundle exec jekyll serve'. If you change this file, please restart the server process.
 #
-# If you need help with YAML syntax, here are some quick references for you: 
+# If you need help with YAML syntax, here are some quick references for you:
 # https://learn-the-web.algonquindesign.ca/topics/markdown-yaml-cheat-sheet/#yaml
 # https://learnxinyminutes.com/docs/yaml/
 #
@@ -18,14 +18,14 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: 前端爱我
+title: 啊哈！前端
 email: wuzhe_@aliyun.com
 description: >- # this means to ignore newlines until "baseurl:"
   一个默默无闻的web前端技术博客，对Vue.js，Node.js感兴趣。
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://qdi5.github.io/" # the base hostname & protocol for your site, e.g. http://example.com
+url: "http://www.ahafe.tech" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: wuzhe
-github_username:  qdi5
+github_username: qdi5
 github_repo: qdi5.github.io
 # Build settings
 plugins:
@@ -57,13 +57,11 @@ permalink: /:year/:month/:day/:title:output_ext
 #   - vendor/gems/
 #   - vendor/ruby/
 defaults:
-  -
-    scope:
+  - scope:
       path: "_posts/kindle" # an empty string here means all files in the project
     values:
       layout: "post"
-  -
-    scope:
+  - scope:
       path: "_posts/google" # an empty string here means all files in the project
     values:
       layout: "post"
