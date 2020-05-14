@@ -65,3 +65,10 @@ defaults:
       path: "_posts/google" # an empty string here means all files in the project
     values:
       layout: "post"
+# 配置valine评论插件的全局变量
+valine_comment:
+  enable: true
+# app_id
+  leancloud_appid: rLjpdbqSOjMoLe0P1OcmRDs2-gzGzoHsz
+# app_key
+  leancloud_appkey: PpQRgch4txM93rxHmgEuajh3

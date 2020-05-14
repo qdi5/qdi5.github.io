@@ -1,5 +1,8 @@
 # jekyll生成博客网站
-
+## 在本地启动jekyll站点
+```ruby
+jekyll serve
+```
 ### 学习笔记
 1. 以html,md,markdown结尾的文件，将会被作为一个页面存在，访问的时候，直接以根路径加上文件名访问，比如：contract.html,访问路径就是：https://qdi5.github.io/contract.html  
 2. 使用`post_url`标签来跳转到其他文章，即使文章的永久链接更换了也不会有影响
@@ -22,3 +25,19 @@
 10.Front Matter:任何包含了`YAML`前言块的文件将会被Jekyll处理为一个特殊的文件。
 11.Data Files。Jekyll支持从_data目录下的`YAML`,`JSON`,`CSV`和`TSV`文件加载数据。**CSV和TSV必须包含标题行**。目前暂不做深入了解，以后可以查看[这里](https://jekyllrb.com/docs/datafiles/ 'Jekyll Data Files说明文档')的文档。    
 12.Permalinks固定链接。是`pages`，`posts`或`collections`的输出路径。它允许你组织你的源代码的目录结构和输出的目录结构不同。
+## changelog
+[2020-05-14] 
+在`_layouts/post.html`里移除disqus评论代码：    
+```ruby
+{% if page.comments == false %}
+  <div class="container mx-auto px-2 py-2 clearfix comments text-accent" >
+    <p>无法加载评论；disqus需要自备梯子；</p>
+    <p>若您已经自备梯子了；则是博主关闭了评论功能,敬请谅解！</p>
+  </div>
+{% else %}
+  <div class="container mx-auto px-2 py-2 clearfix comments">
+    {% include disqus.html %}
+  </div>
+{% endif %}
+```    
+新增valine评论系统
