@@ -23,7 +23,7 @@ email: wuzhe_@aliyun.com
 description: >- # this means to ignore newlines until "baseurl:"
   一个默默无闻的web前端技术博客，对Vue.js，Node.js感兴趣。
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "http://www.ahafe.tech" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://qdi5.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: wuzhe
 github_username: qdi5
 github_repo: qdi5.github.io
