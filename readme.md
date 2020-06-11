@@ -1,7 +1,7 @@
 # jekyll生成博客网站
 ## 在本地启动jekyll站点
 ```ruby
-jekyll serve
+bundle exec jekyll serve
 ```
 ### 学习笔记
 1. 以html,md,markdown结尾的文件，将会被作为一个页面存在，访问的时候，直接以根路径加上文件名访问，比如：contract.html,访问路径就是：https://qdi5.github.io/contract.html  
