@@ -21,8 +21,7 @@
 title: 啊哈！前端
 email: wuzhe_@aliyun.com
 description: >- # this means to ignore newlines until "baseurl:"
-  专注于Vue.js技术栈的web前端技术博客。
-  一直在打杂，从未被超越！
+  佛系web前端技术博客。一直在打杂，从未被超越！
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://qdi5.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: wuzhe
