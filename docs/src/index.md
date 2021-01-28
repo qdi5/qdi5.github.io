@@ -1,7 +1,7 @@
 ---
 home: true
 heroImage: https://v1.vuepress.vuejs.org/hero.png
-tagline: 吴哲的前端技术博客
+tagline: 专注Vue、Node、TypeScript技术栈
 actionText: Quick Start →
 actionLink: /guide/
 features:

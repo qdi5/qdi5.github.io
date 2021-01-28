@@ -5,7 +5,7 @@ module.exports = {
   /**
    * Ref：https://v1.vuepress.vuejs.org/config/#title
    */
-  title: 'Vuepress Docs Boilerplate',
+  title: '啊哈前端',
   /**
    * Ref：https://v1.vuepress.vuejs.org/config/#description
    */
@@ -35,16 +35,16 @@ module.exports = {
     lastUpdated: false,
     nav: [
       {
-        text: 'Guide',
-        link: '/guide/',
+        text: 'Vue',
+        link: '/Vue/',
       },
       {
-        text: 'Config',
-        link: '/config/'
+        text: 'Node',
+        link: '/Node/'
       },
       {
-        text: 'VuePress',
-        link: 'https://v1.vuepress.vuejs.org'
+        text: 'TypeScript',
+        link: '/TypeScript/'
       }
     ],
     sidebar: {

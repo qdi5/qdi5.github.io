@@ -10,11 +10,11 @@ npm run build
 cd src/.vuepress/dist
 
 # if you are deploying to a custom domain
-# echo 'www.example.com' > CNAME
+echo 'www.ahafe.tech' > CNAME
 
-git init
+# git init
 git add -A
-git commit -m 'deploy'
+git commit -m '使用自定义域名'
 
 # if you are deploying to https://<USERNAME>.github.io
 # git push -f git@github.com:<USERNAME>/<USERNAME>.github.io.git master
