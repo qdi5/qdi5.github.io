@@ -10,11 +10,11 @@ npm run build
 cd src/.vuepress/dist
 
 # if you are deploying to a custom domain
-echo 'ahafe.tech' > CNAME
+# echo 'ahafe.tech' > CNAME
 
-# git init
+git init
 git add -A
-git commit -m '修改部署的根路径为/blog/'
+git commit -m '不使用自定义域名'
 
 # if you are deploying to https://<USERNAME>.github.io
 # git push -f git@github.com:<USERNAME>/<USERNAME>.github.io.git master
