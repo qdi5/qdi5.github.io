@@ -14,7 +14,7 @@ echo 'www.ahafe.tech' > CNAME
 
 # git init
 git add -A
-git commit -m '使用自定义域名'
+git commit -m '修改部署的根路径为/'
 
 # if you are deploying to https://<USERNAME>.github.io
 # git push -f git@github.com:<USERNAME>/<USERNAME>.github.io.git master
