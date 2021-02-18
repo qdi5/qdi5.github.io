@@ -14,7 +14,7 @@ cd src/.vuepress/dist
 
 git init
 git add -A
-git commit -m '根路径加上/blog/'
+git commit -m '部署到qdi5.github.io仓库'
 
 # if you are deploying to https://<USERNAME>.github.io
 git push -f git@github.com:qdi5/qdi5.github.io.git master

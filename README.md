@@ -18,3 +18,10 @@
 - `docs/.vuepress/templates/ssr.html`：构建期间Vue服务端渲染基础HTML模板
 - `docs/.vuepress/config.js`：配置的入口文件，也可以是`yml`或`toml`文件
 - `docs/.vuepress/enhanceApp.js`：App层面的增强
+
+## 部署到github pages
+1.cd src
+2.打开git bash命令行工具，执行以下命令
+```
+sh deploy.sh
+``` 
