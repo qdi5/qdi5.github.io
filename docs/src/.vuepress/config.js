@@ -28,7 +28,7 @@ module.exports = {
    * ref：https://v1.vuepress.vuejs.org/theme/default-theme-config.html
    */
   themeConfig: {
-    repo: '',
+    repo: 'https://github.com/qdi5/qdi5.github.io',
     editLinks: false,
     docsDir: '',
     editLinkText: '',
