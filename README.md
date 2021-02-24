@@ -71,10 +71,64 @@ module.exports = {
 #### 5.2. 链接；
 5.2.1. 内部链接
   内部链接会被转换成`<router-link>`作为单页应用的导航。同样，在子目录下的每一个`README.md`或`index.md`将会自动被转换成`index.html`，并带着相应的URL`/` 
+  例如，给出如下的目录结构：
+  ```markdown
+    ├─ README.md
+    ├─ foo
+    │  ├─ README.md
+    │  ├─ one.md
+    │  └─ two.md
+    └─ bar
+      ├─ README.md
+      ├─ three.md
+      └─ four.md
+  ```    
+假设你现在在`foo/one.md`中：
+```Markdown
+[Home](/) <!-- 跳转到根目录下的README.md -->
+[foo](/foo/) <!-- 跳转到foo目录下的index.html -->
+[bar - three](../bar/three.md) <!-- 具体文件可以使用.md结尾（推荐） -->
+[bar - four](../bar/four.html) <!-- 或者可以使用html文件 -->
+```    
 
+### 6、在Markdown中使用Vue
+#### 6.1. 模板
+##### 6.1.1. 插值
+每一个Markdown文件，首先被编译成HTML，然后作为Vue组件传递给`vue-loader`.这意味着可以使用Vue风格的插值语法
+```md
+{{ 1 + 1 }}
+```
+##### 6.1.2. 指令
+指令也可以工作
+```md
+<span v-for="i in 3">{{ i }}</span>
+```    
+##### 6.1.3. 访问网站和页面数据
 
+编译后的组件没有任何私有数据，但是可以访问网站的 `元素据`和[网站全局属性](https://vuepress.vuejs.org/guide/global-computed.html#site 'computed properties')    
 
+##### 6.1.4. 字符串逃逸
+默认情况下，块级的代码块将会被自动包裹在`v-pre`中。如果你想要在内联（inline）的代码块或者普通文本中显示原始的大括号，或者一些Vue特定的语法，你需要使用自定义容器`v-pre`来包裹：
+**input**
+```md
+::: v-pre
+`{{ This will be displayed as-is }}`
+```
+**Output**
+`{{ This will be displayed as-is }}`
 
+##### 使用组件
+所有在`.vuepress/components`中找到的`*.vue`文件将会自动地被注册为全局的异步组件，如：
+```md
+.
+└─ .vuepress
+   └─ components
+      ├─ demo-1.vue
+      ├─ OtherComponent.vue
+      └─ Foo
+         └─ Bar.vue
+```
+在任何Markdown文件里，你可以直接使用这个组件（组件名就是文件名）
 ## 部署到github pages
 1.cd src
 2.打开git bash命令行工具，执行以下命令
