@@ -29,10 +29,11 @@
 |`/config.md`|`/config.html`|
 
 ### 3、配置
-3.1. 所有VuePress相关的文件都将放在`src/.vuepress`目录
-3.2. VuePress内置了基于`headers`的搜索，在所有页面，它会自动从`文章标题`,`h2`,`h3`标签自动建立一个简单的搜索索引。
+3.1. 所有VuePress相关的文件都将放在`src/.vuepress`目录    
 
-3.2. 由于VuePress是一个标准的Vue项目，可以通过创建`.vuepress/enhanceApp.js`来应用app级别的增强，它会被导入到`app`里，这个文件需要`export default`一个钩子函数，这个钩子函数接收一个包含一些app级别的值的对象。你能使用这些钩子去安装额外的Vue插件，注册全局的组件，或者添加额外的路由钩子。
+3.2. VuePress内置了基于`headers`的搜索，在所有页面，它会自动从`文章标题`,`h2`,`h3`标签自动建立一个简单的搜索索引。    
+
+3.3. 由于VuePress是一个标准的Vue项目，可以通过创建`.vuepress/enhanceApp.js`来应用app级别的增强，它会被导入到`app`里，这个文件需要`export default`一个钩子函数，这个钩子函数接收一个包含一些app级别的值的对象。你能使用这些钩子去安装额外的Vue插件，注册全局的组件，或者添加额外的路由钩子。
 
 ### 4、资源处理
 4.1. 相对路径；
@@ -51,7 +52,26 @@ module.exports = {
     }
   }
 }
-```
+```    
+4.2. 公共文件
+有时候，你需要提供的静态资源，不在Markdown或者主题组件中直接引用（比如，favicons和PWA图标）.在这种情况下，你可以直接把它们放到`.vuepress/public`里面，他们将会复制到生成目录的根目录下;
+
+4.3. Base URL
+如果你的网站部署的不是根路径，你需要在`.vuepress/config.js`里设置`base`选项.比如，你打算部署你的网站到`https://foo.github.io/bar/`,然后base应该设置为`/bar/`（必须开头和结尾都有斜杠"/"）.    
+当base URL存在时，引用`.vuepress/public`里的图片，你必须像这样使用URL：`/bar/image.png`.但是一旦你需要改变`base`的值，这种方式就很脆弱，VuePress提供了一个内置的辅助函数`$withBase`（添加到了vue的原型上），用来生成正确的路径：
+```vue
+  <img :src="$withBase('/foo.png')" alt="foo">
+```    
+**上面的语法不仅可以用在主题组件上，也可以用在Markdown文件中**
+同样，如果设置了`base`，它会给`.vuepress/config.js`选项中的所有资源路径的前面加上`base`路径
+
+### 5、Markdown扩展
+#### 5.1. header锚点；
+`h标签`会自带一个锚点链接。可以在`markdown.anchor`选项里配置锚点的渲染规则。
+#### 5.2. 链接；
+5.2.1. 内部链接
+  内部链接会被转换成`<router-link>`作为单页应用的导航。同样，在子目录下的每一个`README.md`或`index.md`将会自动被转换成`index.html`，并带着相应的URL`/` 
+
 
 
 
