@@ -90,6 +90,109 @@ module.exports = {
 [bar - three](../bar/three.md) <!-- 具体文件可以使用.md结尾（推荐） -->
 [bar - four](../bar/four.html) <!-- 或者可以使用html文件 -->
 ```    
+5.2.2. 链接的重定向
+VuePress支持重定向到干净的链接。如果链接`/foo`没有找到，VuePress将会去寻找存在的`/foo/`或`foo.html`.相反，当`/foo/`和`/foo.html`都没找到时，VuePress将会尝试其他路径；有了这个特性，我们能通过官方插件[vuepress-plugin-clean-urls](https://www.npmjs.com/package/vuepress-plugin-clean-urls)自定义网站链接
+
+5.2.3. 页面后缀
+页面和内部链接默认会有`.html`后缀。你可以在`config.markdown.pageSuffix`设置里自定义后缀。
+
+5.2.4. 外部链接
+外部的链接将会被自动地设置为`target="_blank" rel="noopener noreferrer"`
+
+#### 5.3. Front Matter
+VuePress提供了对[YAML front matter](https://jekyllrb.com/docs/front-matter/)开箱即用的支持：
+```yaml
+title: Blogging Like a Hacker
+lang: en-US
+```    
+这些数据可以在当前markdown的正文，或者是任意的自定义或主题组件中使用。
+
+#### 5.4. Github风格的表格
+**输入**
+```md
+| Tables | Are | Cool |
+| ------ | ------: | -----: |
+|col 3 is | right-aligned | $1600 |
+| col 2 is | centered | $12 |
+```
+
+**输出**
+| Tables | Are | Cool |
+| ------ | ------: | -----: |
+|col 3 is | right-aligned | $1600 |
+| col 2 is | centered | $12 |
+
+#### 5.5. 目录
+**输入**
+```md
+[[toc]]
+```
+目录的渲染可以通过`markdown.toc`选项来配置
+
+#### 5.6. 自定义容器
+自定义容器可以自定义它们的类型，标题和内容
+**默认的标题**
+**Input**
+```md
+::: tip
+This is a tip
+:::
+
+::: warning
+This is a warning
+:::
+
+::: danger
+This is a dangerous warning
+:::
+
+::: details
+This is a details block, which does not work in IE / Edge
+:::
+```
+#### 5.7. 代码块高亮
+VuePress使用[Prism](https://prismjs.com/)在Markdown代码块里使用带颜色的文本高亮编程语言语法。Prism支持大量的编程语言.对于代码块，你只需要在开头的倒引号后面追加编程语言的名称    
+**Input**
+```js
+  ```js
+  export default {
+    name: 'MyComponent',
+    // ...
+  }
+```
+
+**Output**    
+```js
+export default {
+  name: 'MyComponent'
+}
+```
+#### 5.8. 代码块中的行高亮
+**高亮第四行代码**
+```
+```js{4}
+  export default {
+    data () {
+      return {
+        msg: 'Highlighted!'
+      }
+    }
+  }
+```
+除了单行，你也可以指定多个单行，范围或者两者都包含
+- 行范围；例如：`{5-8}`,`{3-10}`,`{10-17}`
+- 多个单行；例如：`{4.7.9}`\
+- 行返回和单行；例如：`{4,7-18,16,23-27,40}`
+
+#### 5.9. 行号
+通过配置，你可以为每一行代码块启动行号
+```js
+module.exports = {
+  markdown: {
+    lineNumbers: true
+  }
+}
+```
 
 ### 6、在Markdown中使用Vue
 #### 6.1. 模板
@@ -108,13 +211,15 @@ module.exports = {
 编译后的组件没有任何私有数据，但是可以访问网站的 `元素据`和[网站全局属性](https://vuepress.vuejs.org/guide/global-computed.html#site 'computed properties')    
 
 ##### 6.1.4. 字符串逃逸
-默认情况下，块级的代码块将会被自动包裹在`v-pre`中。如果你想要在内联（inline）的代码块或者普通文本中显示原始的大括号，或者一些Vue特定的语法，你需要使用自定义容器`v-pre`来包裹：
-**input**
+默认情况下，块级的代码块将会被自动包裹在`v-pre`中。如果你想要在内联（inline）的代码块或者普通文本中显示原始的大括号，或者一些Vue特定的语法，你需要使用自定义容器`v-pre`来包裹：    
+
+**input**    
 ```md
 ::: v-pre
 `{{ This will be displayed as-is }}`
 ```
-**Output**
+**Output**    
+
 `{{ This will be displayed as-is }}`
 
 ##### 使用组件
