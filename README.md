@@ -195,22 +195,66 @@ module.exports = {
 ```
 
 ### 6、在Markdown中使用Vue
-#### 6.1. 模板
-##### 6.1.1. 插值
+#### 6.1. 浏览器API访问限制
+因为VuePress应用程序在生成静态构建时是在Node.js中服务端渲染的，任何Vue的使用者必须遵循通用代码编写规范。简而言之，确保仅在`beforeMount`或`mounted`钩子函数里访问浏览器/DOM的API.
+
+如果你正在使用，或者需要展示一个对于SSR不怎么友好的组件（比如包含了自定义指令），你可以将它们包裹在内置的`<ClientOnly>`组件中：
+```md
+<ClientOnly>
+  <NonSSRFriendlyComponent/>
+</ClientOnly>
+```    
+注意这并没有修复组件或者库在被`import`的时候，访问浏览器api的限制；为了确保代码能够在`import`时访问到浏览器环境，你需要在正确的生命周期钩子中动态导入它们：    
+```js
+  <script>
+    export default {
+      mounted () {
+        import('./lib-that-access-window-on-import').then(module => {
+          // use code
+        })
+      }
+    }
+  </script>
+```    
+
+如果你的模块`export default`一个Vue组件，你可以动态注册它：    
+
+```vue
+<template>
+  <component v-if="dynamicComponent" :is="dynamicComponent"></component>
+</template>
+
+<script>
+export default {
+  data () {
+    return {
+      dynamicComponent: null
+    }
+  },
+  mounted () {
+    import('./lib-that-access-window-on-import').then(module => {
+      this.dynamicComponent = module.default
+    })
+  }
+}
+</script>
+```
+#### 6.2. 模板
+##### 6.2.1. 插值
 每一个Markdown文件，首先被编译成HTML，然后作为Vue组件传递给`vue-loader`.这意味着可以使用Vue风格的插值语法
 ```md
 {{ 1 + 1 }}
 ```
-##### 6.1.2. 指令
+##### 6.2.2. 指令
 指令也可以工作
 ```md
 <span v-for="i in 3">{{ i }}</span>
 ```    
-##### 6.1.3. 访问网站和页面数据
+##### 6.2.3. 访问网站和页面数据
 
 编译后的组件没有任何私有数据，但是可以访问网站的 `元素据`和[网站全局属性](https://vuepress.vuejs.org/guide/global-computed.html#site 'computed properties')    
 
-##### 6.1.4. 字符串逃逸
+##### 6.2.4. 字符串逃逸
 默认情况下，块级的代码块将会被自动包裹在`v-pre`中。如果你想要在内联（inline）的代码块或者普通文本中显示原始的大括号，或者一些Vue特定的语法，你需要使用自定义容器`v-pre`来包裹：    
 
 **input**    
@@ -222,7 +266,7 @@ module.exports = {
 
 `{{ This will be displayed as-is }}`
 
-##### 使用组件
+##### 6.2.5. 使用组件
 所有在`.vuepress/components`中找到的`*.vue`文件将会自动地被注册为全局的异步组件，如：
 ```md
 .
@@ -234,6 +278,67 @@ module.exports = {
          └─ Bar.vue
 ```
 在任何Markdown文件里，你可以直接使用这个组件（组件名就是文件名）
+```md
+<demo-1/>
+<OtherComponent/>
+<Foo-Bar/>
+```    
+##### 6.2.6. 在Headers里面使用组件
+可以在h标签里面使用Vue组件，但是注意下列语法的区别：
+|Markdown|输出的html|解析后的h标签|
+|------|------:|------:|
+|# text </Tag>|<h1>text </Tag></h1>|`text`|
+|# text `</Tag>`|`<h1>text <code>&lt;Tag/&gt;</code></h1>`|`text</Tag>`|
+
+被`<code>`标签包裹的HTML将会按照原样显示；没有被`<code>`包裹的HTML标签将会被Vue解析
+
+##### 6.2.7. 使用预处理器
+VuePress内置了webpack支持的以下预处理器：`sass`,`scss`,`less`,`stylus`和`pug`.你只需要安装对应的依赖。例如，启用`sass`：    
+
+```sh
+yarn add -D sass-loader node-sass
+```    
+现在你可以在Markdown和主题组件里如下使用：
+
+```vue
+<style lang="sass">
+.title
+  font-size: 20px
+</style>
+```    
+
+使用`<template lang="pug">`需要安装`pug`和`pug-plain-loader`:    
+
+```sh
+yarn add -D pug pug-plain-loader
+```
+> 如果你使用Stylus，不需要在项目中安装`stylus`和`stylus-loader`；VuePress内部就是使用的Stylus.
+对于webpack不支持的预处理器，你需要[继承内部webpack配置](https://vuepress.vuejs.org/config/#less),同时安装必要的依赖.    
+
+##### 6.2.8. 脚本和样式提取
+有时，你可能只需要在当前页面应用js或者css。在这些情况下，你可以直接在Markdown文件中写根级别的`<script>`或者`<style>`块。这将会从已编译的html中提取出来，并作为生成的Vue单文件组件的`<script>`和`<style>`标签    
+
+##### 6.2.9. 内置组件
+**OutboundLink**
+用于标记这是一个外部链接。这个组件应用在每一个外部链接上
+
+**ClientOnly**
+参考[Browser API Access Restrictions.](https://vuepress.vuejs.org/guide/using-vue.html#browser-api-access-restrictions)
+
+**Content**
+- **Props**
+  - `pageKey` - 字符串，页面的hash键值，默认是当前页面的键值
+  - `slotKey` - 字符串，[Markdown slot](https://vuepress.vuejs.org/guide/markdown-slot.html#why-do-i-need-markdown-slot).默认是[default slot](https://vuepress.vuejs.org/guide/markdown-slot.html#example)
+- **Usage**
+  为指定页面(.md)定义一个特定的slot用于渲染。当使用[自定义布局](https://vuepress.vuejs.org/theme/default-theme-config.html#custom-layout-for-specific-pages)或者[写一个主题](https://vuepress.vuejs.org/theme/writing-a-theme.html#content-outlet)时特别有用
+
+  ```vue
+  <Content/>
+  ```
+
+
+
+
 ## 部署到github pages
 1.cd src
 2.打开git bash命令行工具，执行以下命令
